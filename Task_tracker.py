@@ -10,8 +10,11 @@ first_name = input("Please enter your first name: ").title()
 print(f"Hello and welcome back {first_name}")
 tasks = []
 while True:
-    user_choice = input("\nPlease enter a choice (a) to add task or " 
-                        "b to add a task for next week or (exit) to quit ").lower()
+    user_choice = input("\nPlease enter a choice.\n "
+                        "(a) to add task.\n " 
+                        "(b) to add a task for next week.\n "
+                        "(v) to view the task.\n "
+                        "(exit) to quit.\n ").strip().lower()
     
     if user_choice == 'exit':
         break
@@ -30,11 +33,22 @@ while True:
             'timeframe': 'future',
         }
         tasks.append(task)
+    
+    elif user_choice == 'v':
+        print(f'\nThese are your current items: ')
+        for item in tasks:
+            if item['timeframe'] == 'current':
+               print(f" {item['name']}")
+
+        print(f'\nThese are your future events: ')     
+        for item in tasks:
+            if item['timeframe'] == 'future':
+               print(f" {item['name']}")
     else:
         print("Please enter one of the choices")
 
-print("\nThese are your task for this week: ")
 
+"""
 for item in tasks:
     if item['timeframe'] == 'current':
         print(f'These are your current items: ')
@@ -42,7 +56,7 @@ for item in tasks:
     else:
         print(f'These are your future events: ')
         print(f" {item['name']}")
-        
+        """
 
 
 
