@@ -13,12 +13,10 @@ while True:
     user_choice = input("\nPlease enter a choice.\n "
                         "(a) to add task.\n " 
                         "(b) to add a task for next week.\n "
-                        "(v) to view the task.\n "
-                        "(exit) to quit.\n ").strip().lower()
+                        "(exit) to quit and write to the file.\n ").strip().lower()
     
-    if user_choice == 'exit':
-        break
-    elif user_choice == 'a':
+    
+    if user_choice == 'a':
         current_task = input("What task would you like to add for this week: ")
         task = {
             'name': current_task,
@@ -34,29 +32,22 @@ while True:
         }
         tasks.append(task)
     
-    elif user_choice == 'v':
+    elif user_choice == 'exit':
         print(f'\nThese are your current items: ')
-        for item in tasks:
-            if item['timeframe'] == 'current':
-               print(f" {item['name']}")
+        with open("current_task.txt", "w") as file:
+            for item in tasks:
+                if item['timeframe'] == 'current':
+                    file.write(f"{item['name']}\n")
 
         print(f'\nThese are your future events: ')     
-        for item in tasks:
-            if item['timeframe'] == 'future':
-               print(f" {item['name']}")
+        with open("future_task.txt", "w") as file:
+            for item in tasks:
+                if item['timeframe'] == 'future':
+                    file.write(f"{item['name']}\n")
+        break
     else:
         print("Please enter one of the choices")
 
-
-"""
-for item in tasks:
-    if item['timeframe'] == 'current':
-        print(f'These are your current items: ')
-        print(f" {item['name']}")
-    else:
-        print(f'These are your future events: ')
-        print(f" {item['name']}")
-        """
 
 
 
